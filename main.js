@@ -1,4 +1,3 @@
-// Import the necessary libraries
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
@@ -8,11 +7,19 @@ const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerH
 camera.position.set(9, -1, 17);
 camera.lookAt(-60, 10, -20);
 
-const renderer = new THREE.WebGLRenderer({ logarithmicDepthBuffer: true });
-  renderer.sortObjects = false;
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.shadowMap.enabled = true;
-  document.body.appendChild(renderer.domElement);
+const renderer = new THREE.WebGLRenderer({ logarithmicDepthBuffer: true, alpha: true });
+renderer.sortObjects = false;
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+
+// Append the renderer's dom element to the body
+document.body.appendChild(renderer.domElement);
+
+// Set CSS styles for the renderer's dom element
+renderer.domElement.style.position = 'absolute';
+renderer.domElement.style.top = '0';
+renderer.domElement.style.left = '0';
+renderer.domElement.style.zIndex = '1'; // You can adjust the z-index value as needed
 
 const loader = new GLTFLoader();
 let airplane;
