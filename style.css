@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    overflow: hidden; /* Hide overflow to prevent scrollbar */
+}
+
+#3DContainer {
+    position: relative;
+    z-index: 1; /* Set a higher z-index for the container of 3D model */
+}
+
+#container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2; /* Set a higher z-index for the canvas to appear in front of the container */
+}
+
+main {
+    position: relative;
+    z-index: 0; /* Set a lower z-index for the rest of the HTML content */
+}
