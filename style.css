@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    overflow: hidden; /* Hide overflow to prevent scrollbar */
+     /* Hide overflow to prevent scrollbar */
 }
 
 #3DContainer {

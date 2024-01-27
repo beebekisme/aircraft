@@ -4,20 +4,15 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 // Create a scene, a camera, and a renderer
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('gainsboro');
-
 const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.set(9, -1, 17);
 camera.lookAt(-60, 10, -20);
 
 const renderer = new THREE.WebGLRenderer({ logarithmicDepthBuffer: true });
-renderer.sortObjects = false;
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.shadowMap.enabled = true;
-document.body.appendChild(renderer.domElement);
-
-const axesHelper = new THREE.AxesHelper(20);
-scene.add(axesHelper);
+  renderer.sortObjects = false;
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.shadowMap.enabled = true;
+  document.body.appendChild(renderer.domElement);
 
 const loader = new GLTFLoader();
 let airplane;
@@ -86,6 +81,21 @@ loader.load('./airplane/danfe.glb', function (gltf) {
     raycaster.setFromCamera(mouse, camera);
   }, false);
 
+  function handleResize() {
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
+  
+    // Update the camera aspect ratio
+    camera.aspect = newWidth / newHeight;
+    camera.updateProjectionMatrix();
+  
+    // Update the renderer size
+    renderer.setSize(newWidth, newHeight);
+  }
+  
+  // Add event listener for window resize
+  window.addEventListener('resize', handleResize);
+
   function updateAirplane() {
     // Move the airplane along the direction vector
     airplane.position.add(direction.clone().multiplyScalar(speed));
@@ -125,5 +135,7 @@ loader.load('./airplane/danfe.glb', function (gltf) {
     updateAirplane();
     renderer.render(scene, camera);
   }
+  handleResize();
+
   animate();
 });
