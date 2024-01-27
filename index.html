@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <script type="module" src="/main.js"></script> -->
+    <!-- Link to Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/8bf558cee2.js" crossorigin="anonymous"></script>
+    <title>FlyDanfe - Soaring in the Himalayas</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>	
+    <script src="https://cdn.jsdelivr.net/npm/countup.js"></script>
+	<script type="module" src="./main.js"></script>
+</head>
+<body class="font-sans bg-gray-100">
+	
+    <main class="text-gray-800">
+        <section class="relative h-screen bg-cover bg-center px-8 lg:px-16 py-8 lg:pt-16 flex justify-center" style="background-image: url('https://flydanfe.com/sitepad-data/uploads/2023/12/home-header1.jpg');">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="container mx-auto relative">
+                <div class="grid gap-y-12 md:gap-y-24">
+                    <div>
+                        <img src="https://flydanfe.com/sitepad-data/uploads/2023/12/DanfeLogo3.jpg" class="w-36 sm:w-52 md:w-80">
+                    </div>
+                    <div class="flex flex-col items-end justify-center text-white mb-4 md:mb-0">
+                        <h1 class="text-2xl md:text-3xl lg:text-4xl w-full h-24 md:w-1/2 font-sans font-bold mb-4 text-left ">The newest airline to soar the majestic Himalayas!
+                            <div class=" h-1 mt-2 w-40  bg-yellow-300"></div>
+                        </h1>
+                        <p class="text-white w-full h-24 md:w-1/2 text-left text-justify">In the heart of the majestic Himalayan region, a new airline is poised to take flight, connecting the breathtaking landscapes and the communities nestled among the towering peaks. With a commitment to safety, comfort, and industry-leading 5-star service, the airline endeavors to provide a unique flying experience that showcases the hospitality of FlyDanfé.</p>
+                    </div>
+                    <div class="flex items-end justify-end mt-16 md:mt-8 lg:mt-2">
+                        <img src="https://flydanfe.com/sitepad-data/uploads/2023/12/ATR72.png" class="w-100%" />
+                    </div>
+                </div>
+            </div>
+        </section>
+		<div id="container" style="pointer-events: none;"></div>
+        <!-- Add your script to create the three.js scene and the flying airplane -->
+        
+        <section class="relative lg::h-80 bg-cover bg-center px-8 lg:px-16 py-8 lg:py-16" style="background-image: url('https://flydanfe.com/sitepad-data/uploads/2023/12/counter-bg.jpg');">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="container mx-auto relative">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-8 items-center justify-center">
+                    <div class="text-white text-center  p-2 md:p-8 rounded-lg">
+                        <h2 id="destinationCounter" class="text-4xl md:text-6xl text-yellow-300 font-bold md:mb-2">0</h2>
+                        <p class="text-2xl md:text-3xl font-medium">Destinations</p>
+                    </div>
+                    <div class="text-white text-center  p-2 md:p-8 rounded-lg">
+                        <h2 id="aircraftsCounter" class="text-4xl md:text-6xl text-yellow-300 font-bold md:mb-2">0</h2>
+                        <p class="text-2xl md:text-3xl font-medium">Aircrafts</p>
+                    </div>
+                    <div class="text-white text-center  p-2 md:p-8 rounded-lg">
+                        <h2  id="crewMembersCounter" class="text-4xl md:text-6xl text-yellow-300 font-bold md:mb-2">0</h2>
+                        <p class="text-2xl md:text-3xl font-medium">Crew Members</p>
+                    </div>
+                    <div class="text-white text-center  p-2 md:p-8 rounded-lg">
+                        <h2 id="happyPassengersCounter" class="text-4xl md:text-6xl text-yellow-300 font-bold md:mb-2">0</h2>
+                        <p class="text-2xl md:text-3xl font-medium">Happy Passengers</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            window.onload = function() {
+                animateCounters();
+            };
+        
+            function getMaxTargetValue() {
+                return Math.max(12, 6, 62, 700000);
+            }
+        
+            function animateCounters() {
+                var maxTargetValue = getMaxTargetValue();
+                var totalDuration = 5000; // Set the total duration for all counters
+        
+                animateCounter('destinationCounter', 12, totalDuration);
+                animateCounter('aircraftsCounter', 6, totalDuration);
+                animateCounter('crewMembersCounter', 62, totalDuration);
+                animateCounter('happyPassengersCounter', 700000, totalDuration);
+            }
+        
+            function animateCounter(elementId, targetValue, totalDuration) {
+                var currentValue = parseInt(document.getElementById(elementId).innerText);
+                var increment = 1;
+        
+                if (elementId === 'happyPassengersCounter') {
+                    increment = 1000; // Set increment to 10 for 'happyPassengersCounter'
+                }
+        
+                if (currentValue < targetValue) {
+                    var durationPerValue = totalDuration / ((targetValue - currentValue) / increment);
+                    var intervalId = setInterval(function() {
+                        currentValue += increment;
+                        if (currentValue >= targetValue) {
+                            clearInterval(intervalId);
+                            currentValue = targetValue;
+                        }
+                        document.getElementById(elementId).innerText = currentValue + "+";
+                    }, durationPerValue);
+                }
+            }
+        </script>
+        
+        <!-- Other sections go here -->
+
+    </main>
+
+    <footer class=" relative mx-auto px-8 md:px-32 py-8 bg-gray-900 text-white py-8 overflow-hidden">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 md:mb-40">
+            <div>
+                <h2 class="text-2xl font-bold mb-4 text-yellow-300">FlyDanfe</h2>
+                <p>FlyDanfé is an upcoming full-service airline. Embark on a new era of airlines in Nepal and the boundless horizons with Danfé. Where every journey is a chapter in the book of endless adventures.</p>
+                <div class="flex mt-4">
+                    <a href="#" class="text-white mr-4 ">
+                        <i class="fab fa-facebook-f text-base bg-pink-700 hover:bg-black p-3 md:p-4 rounded-full transition duration-300"></i>
+                    </a>
+                    <a href="#" class="text-white mr-4">
+                        <i class="fab fa-instagram text-base bg-pink-700 hover:bg-black p-3 md:p-4 rounded-full transition duration-300"></i>
+                    </a>
+                    <a href="#" class="text-white mr-4">
+                        <i class="fab fa-twitter text-base bg-pink-700 hover:bg-black p-3 md:p-4 rounded-full transition duration-300"></i>
+                    </a>
+                    <a href="#" class="text-white mr-4">
+                        <i class="fab fa-linkedin-in text-base bg-pink-700 hover:bg-black p-3 md:p-4 rounded-full transition duration-300"></i>
+                    </a>
+                    <a href="#" class="text-white mr-4">
+                        <i class="fab fa-google text-base bg-pink-700 hover:bg-black p-3 md:p-4 rounded-full transition duration-300"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="flex flex-col md:items-center ">
+                <h2 class="text-2xl font-bold mb-4 text-yellow-300">Quick Links</h2>
+                <ul>
+                    <li><a href="#" class="text-yellow-300">Home</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold mb-4 text-yellow-300">Contact Information</h2>
+                <div class="text-lg flex flex-col space-y-4">
+                    <p>Prakash Sanyas Ashram Road, Airport Way </p>
+                    <p>Kathmandu, Nepal</p>
+                    <p>+977 9800000000</p>
+                    <p>hello@flydanfe.com</p>
+                </div>
+            </div>
+        </div>
+		
+        <div class="absolute -bottom-16 md:-bottom-24 -left-4 w-full h-24 bg-yellow-300 transform rotate-6"></div>
+        <div class="absolute -bottom-16 md:-bottom-32 lef-24 md:left-52 w-full h-24 bg-yellow-300 transform rotate-12"></div>
+        <div class="absolute -bottom-16 md:-bottom-24 -right-4 w-full h-24 bg-yellow-300 transform -rotate-6"></div>
+    </footer>
+</body>
+</html>
