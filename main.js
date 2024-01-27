@@ -30,11 +30,11 @@ loader.load('./airplane/danfe.glb', function (gltf) {
   airplane.rotation.y = -Math.PI / 2;
   airplane.rotation.x = -Math.PI / 40;
   scene.add(airplane);
-
+  
   // Set the initial position and rotation of the airplane
   airplane.position.set(0, 0, -30);
 
-  const light = new THREE.AmbientLight(0xffffff, 1);
+  const light = new THREE.AmbientLight(0xffffff, 3);
   light.position.set(0, 1, 0);
   scene.add(light);
 
